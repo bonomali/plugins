@@ -13,8 +13,17 @@
     "addToProject": "yo datocms-plugin:add-to-project",
     "test": "echo 1"
   },
-  "keywords": ["datocms","datocms-plugin","sidebar","json-field","button"],
-  "files": ["dist", "docs"],
+  "keywords": [
+    "datocms",
+    "datocms-plugin",
+    "sidebar",
+    "json-field",
+    "button"
+  ],
+  "files": [
+    "dist",
+    "docs"
+  ],
   "author": "DatoCMS <support@datocms.com>",
   "license": "ISC",
   "datoCmsPlugin": {
@@ -23,49 +32,65 @@
     "coverImage": "docs/cover.png",
     "entryPoint": "dist/index.html",
     "pluginType": "sidebar",
-    "fieldTypes": ["json"],
+    "fieldTypes": [
+      "json"
+    ],
     "parameters": {
-  "global": [
-    {
-      "id": "developmentMode",
-      "label": "Development mode",
-      "type": "boolean",
-      "required": true,
-      "default": false,
-      "hint": "Shows debug messages in console"
+      "global": [
+        {
+          "id": "developmentMode",
+          "label": "Development mode",
+          "type": "boolean",
+          "required": true,
+          "default": false,
+          "hint": "Shows debug messages in console"
+        }
+      ],
+      "instance": [
+        {
+          "id": "url",
+          "label": "Button Url",
+          "type": "string",
+          "required": true
+        },
+        {
+          "id": "label",
+          "label": "Button label",
+          "type": "string",
+          "hint": "Text to show on the button",
+          "required": true
+        },
+        {
+          "id": "hint",
+          "label": "Hint",
+          "type": "string",
+          "hint": "What the button does",
+          "required": false
+        },
+        {
+          "id": "custom_headers",
+          "label": "Custom headers",
+          "type": "json",
+          "required": false,
+          "hint": "Example: {}"
+        },
+        {
+          "id": "method",
+          "label": "Method",
+          "type": "string",
+          "required": true,
+          "hint": "",
+          "default": "GET"
+        }
+      ]
     }
-  ],
-  "instance": [
-    {
-      "id": "button_url",
-      "label": "Button Url",
-      "type": "string",
-      "required": true
-    },
-    {
-      "id": "custom_headers",
-      "label": "Custom headers",
-      "type": "json",
-      "required": false,
-      "hint": "Example: {}"
-    },
-     {
-      "id": "method",
-      "label": "Method",
-      "type": "string",
-      "required": true,
-      "hint": "",
-      "default": "GET"
-    }
-  ]
-}
   },
   "devDependencies": {
-
     "@babel/cli": "^7.0.0-beta.54",
     "@babel/core": "^7.0.0-beta.54",
     "@babel/preset-env": "^7.0.0-beta.54",
-    "@babel/register": "^7.0.0-beta.54", "babel-eslint": "^8.2.6",
+    "@babel/register": "^7.0.0-beta.54",
+    "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.0-beta",
     "concurrently": "^4.0.1",
     "css-loader": "^1.0.0",
@@ -74,6 +99,7 @@
     "eslint-import-resolver-webpack": "^0.10.1",
     "eslint-loader": "^2.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "generator-datocms-plugin": "^1.0.3",
     "html-webpack-include-assets-plugin": "^1.0.5",
     "html-webpack-inline-source-plugin": "^0.0.10",
     "html-webpack-plugin": "^3.2.0",
@@ -86,10 +112,9 @@
     "webpack": "^4.16.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.10",
-    "generator-datocms-plugin": "^1.0.3",
     "yo": "^2.0.5"
   },
   "dependencies": {
-
+    "node-fetch": "^2.3.0"
   }
 }
