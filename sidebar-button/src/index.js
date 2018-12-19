@@ -12,6 +12,7 @@ const callUrl = (url, headers, body) => {
     })
     .catch((e) => {
       document.getElementById('DatoCMS-button--primary').classList.remove('loading');
+      console.log(e);
       document.getElementsByClassName('error')[0].textContent = 'There was an error';
     });
 };
