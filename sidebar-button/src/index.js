@@ -1,5 +1,5 @@
 import './style/style.sass';
-import './style/spinner.sass';
+import './style/button.sass';
 
 const callUrl = (url, headers, body) => {
   document.getElementById('DatoCMS-button--primary').className += 'loading';
