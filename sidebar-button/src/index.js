@@ -7,14 +7,11 @@ const callUrl = (url, headers, body) => {
     url, { method: 'POST', headers, body },
   )
     .then(() => {
-      document.getElementById('DatoCMS-button--primary').className -= 'loading';
+      document.getElementById('DatoCMS-button--primary').classList.remove('loading');
     })
     .catch((e) => {
-      document.getElementById('DatoCMS-button--primary').className -= 'loading';
-      const error = document.createElement('p');
-      error.classList.add('error');
-      error.textContent = e;
-      document.getElementsById('container').appendChild(error);
+      document.getElementById('DatoCMS-button--primary').classList.remove('loading');
+      document.getElementByClassName('error')[0].innerHtml = e;
     });
 };
 
@@ -71,4 +68,8 @@ window.DatoCmsPlugin.init((plugin) => {
       ),
     );
   }, false);
+
+  const error = document.createElement('p');
+  error.classList.add('error');
+  document.getElementById('container').appendChild(error);
 });
