@@ -1,9 +1,10 @@
 import './style/style.sass';
 import './style/button.sass';
+import rFetch from 'fetch-reject';
 
 const callUrl = (url, headers, body) => {
   document.getElementById('DatoCMS-button--primary').className += 'loading';
-  fetch(
+  rFetch(
     url, { method: 'POST', headers, body },
   )
     .then(() => {
@@ -11,7 +12,7 @@ const callUrl = (url, headers, body) => {
     })
     .catch((e) => {
       document.getElementById('DatoCMS-button--primary').classList.remove('loading');
-      document.getElementByClassName('error')[0].innerHtml = e;
+      document.getElementsByClassName('error')[0].textContent = 'There was an error';
     });
 };
 
@@ -39,6 +40,7 @@ window.DatoCmsPlugin.init((plugin) => {
 
   const completeHeaders = new Headers(
     Object.assign(
+      {},
       JSON.parse(headers),
       {
         'Content-Type': 'application/json',
@@ -52,10 +54,10 @@ window.DatoCmsPlugin.init((plugin) => {
   const button = document.createElement('button');
   const spinner = document.createElement('span');
   button.id = ('DatoCMS-button--primary');
-  spinner.id = ('spinner');
   button.textContent = label;
-  container.appendChild(button);
   button.appendChild(spinner);
+  spinner.id = ('spinner');
+  container.appendChild(button);
 
   button.addEventListener('click', (event) => {
     if (!event.target.matches('#DatoCMS-button--primary')) return;
