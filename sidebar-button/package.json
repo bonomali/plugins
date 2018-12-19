@@ -2,7 +2,7 @@
   "name": "datocms-plugin-sidebar-button",
   "homepage": "https://github.com/datocms/plugins/datocms-plugin-sidebar-button",
   "version": "0.0.1",
-  "description": "Shows button",
+  "description": "A button that makes a post to a third part request with some info about the item",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"yarn dev\" \"yarn localtunnel\"",
@@ -18,7 +18,8 @@
     "datocms-plugin",
     "sidebar",
     "json-field",
-    "button"
+    "button",
+    "post"
   ],
   "files": [
     "dist",
@@ -58,7 +59,8 @@
           "label": "Button label",
           "type": "string",
           "hint": "Text to show on the button",
-          "required": true
+          "required": true,
+          "default": "Invite user"
         },
         {
           "id": "hint",
@@ -68,19 +70,11 @@
           "required": false
         },
         {
-          "id": "custom_headers",
+          "id": "headers",
           "label": "Custom headers",
           "type": "json",
           "required": false,
           "hint": "Example: {}"
-        },
-        {
-          "id": "method",
-          "label": "Method",
-          "type": "string",
-          "required": true,
-          "hint": "",
-          "default": "GET"
         }
       ]
     }

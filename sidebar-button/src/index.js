@@ -1,40 +1,74 @@
-import './style.sass';
+import './style/style.sass';
+import './style/spinner.sass';
 
-const callUrl = (url, method, headers, body) => fetch(
-  url, { method, headers, body },
-)
-  .then(c => console.log(c))
-  .catch(e => console.log(e));
+const callUrl = (url, headers, body) => {
+  document.getElementById('DatoCMS-button--primary').className += 'loading';
+  fetch(
+    url, { method: 'POST', headers, body },
+  )
+    .then(() => {
+      document.getElementById('DatoCMS-button--primary').className -= 'loading';
+    })
+    .catch((e) => {
+      document.getElementById('DatoCMS-button--primary').className -= 'loading';
+      const error = document.createElement('p');
+      error.classList.add('error');
+      error.textContent = e;
+      document.getElementsById('container').appendChild(error);
+    });
+};
 
 window.DatoCmsPlugin.init((plugin) => {
   plugin.startAutoResizer();
   const {
-    method, url, headers, label, hint,
+    url, headers, label, hint,
   } = plugin.parameters.instance;
 
   const container = document.createElement('div');
-  const link = document.createElement('a');
-  const p = document.createElement('p');
-
-  container.classList.add('container');
-  link.classList.add('request-button');
-
-  link.textContent = 'Clicca qui';
-  container.textContent = label;
-  p.textContent = hint;
-
-  const completeHeaders = Object.assign(
-    {},
-    headers,
-    {
-      'Access-Control-Allow-Origin': '*',
-      'content-type': 'application/json',
-    },
-  );
-
-  link.addEventListener('click', () => callUrl(
-    url, method, completeHeaders, JSON.stringify({ id: plugin.itemId }),
-  ), false);
-  container.appendChild(link);
+  container.id = ('container');
   document.body.appendChild(container);
+
+  const title = document.createElement('h6');
+  title.textContent = 'Custom button';
+  title.id = ('title');
+  container.appendChild(title);
+
+  if (hint) {
+    const p = document.createElement('p');
+    p.id = ('hint');
+    p.textContent = hint;
+    container.appendChild(p);
+  }
+
+  const completeHeaders = new Headers(
+    Object.assign(
+      JSON.parse(headers),
+      {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+    ),
+  );
+  completeHeaders.append('POST', 'OPTIONS');
+  const button = document.createElement('button');
+  const spinner = document.createElement('span');
+  button.id = ('DatoCMS-button--primary');
+  spinner.id = ('spinner');
+  button.textContent = label;
+  container.appendChild(button);
+  button.appendChild(spinner);
+
+  button.addEventListener('click', (event) => {
+    if (!event.target.matches('#DatoCMS-button--primary')) return;
+    event.preventDefault();
+    callUrl(
+      url, completeHeaders, JSON.stringify(
+        {
+          id: plugin.itemId,
+        },
+      ),
+    );
+  }, false);
 });
