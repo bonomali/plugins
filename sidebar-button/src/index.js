@@ -4,13 +4,16 @@ import rFetch from 'fetch-reject';
 
 const callUrl = (url, headers, body) => {
   document.getElementById('DatoCMS-button--primary').className += 'loading';
+  document.getElementById('DatoCMS-button--primary').disabled = true;
   rFetch(
     url, { method: 'POST', headers, body },
   )
     .then(() => {
+      document.getElementById('DatoCMS-button--primary').disabled = false;
       document.getElementById('DatoCMS-button--primary').classList.remove('loading');
     })
     .catch((e) => {
+      document.getElementById('DatoCMS-button--primary').disabled = false;
       document.getElementById('DatoCMS-button--primary').classList.remove('loading');
       console.log(e);
       document.getElementsByClassName('error')[0].textContent = 'There was an error';

@@ -2,7 +2,7 @@
   "name": "datocms-plugin-sidebar-button",
   "homepage": "https://github.com/datocms/plugins/datocms-plugin-sidebar-button",
   "version": "0.0.1",
-  "description": "A button that makes a post to a third part request with some info about the item",
+  "description": "A button that makes a post request to url with record id",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"yarn dev\" \"yarn localtunnel\"",
@@ -14,8 +14,6 @@
     "test": "echo 1"
   },
   "keywords": [
-    "datocms",
-    "datocms-plugin",
     "sidebar",
     "json-field",
     "button",
@@ -25,7 +23,7 @@
     "dist",
     "docs"
   ],
-  "author": "DatoCMS <support@datocms.com>",
+  "author": "Souljuse <i.oppo@datocms.com>",
   "license": "ISC",
   "datoCmsPlugin": {
     "title": "Sidebar Button",
