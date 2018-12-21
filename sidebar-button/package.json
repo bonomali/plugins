@@ -14,6 +14,8 @@
     "test": "echo 1"
   },
   "keywords": [
+    "datocms",
+    "datocms-plugin",
     "sidebar",
     "json-field",
     "button",
