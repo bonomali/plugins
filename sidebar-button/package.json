@@ -1,7 +1,7 @@
 {
   "name": "datocms-plugin-sidebar-button",
   "homepage": "https://github.com/datocms/plugins/datocms-plugin-sidebar-button",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A button that makes a post request to url with record id",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
   "datoCmsPlugin": {
     "title": "Sidebar Button",
     "previewImage": "docs/preview.gif",
-    "coverImage": "docs/cover.png",
+    "coverImage": "docs/cover.jpg",
     "entryPoint": "dist/index.html",
     "pluginType": "sidebar",
     "fieldTypes": [
@@ -59,7 +59,8 @@
           "label": "Button label",
           "type": "string",
           "hint": "Text to show on the button",
-          "required": true
+          "required": true,
+          "default": "Go"
         },
         {
           "id": "hint",
