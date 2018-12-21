@@ -3,20 +3,25 @@ import './style/button.sass';
 import rFetch from 'fetch-reject';
 
 const callUrl = (url, headers, body) => {
-  document.getElementById('DatoCMS-button--primary').className += 'loading';
-  document.getElementById('DatoCMS-button--primary').disabled = true;
+  const button = document.getElementById('DatoCMS-button--primary');
+  const statement = document.getElementById('statement');
+  statement.classList.remove('error');
+  statement.textContent = '';
+  button.className += 'loading';
+  button.disabled = true;
   rFetch(
     url, { method: 'POST', headers, body },
   )
     .then(() => {
-      document.getElementById('DatoCMS-button--primary').disabled = false;
-      document.getElementById('DatoCMS-button--primary').classList.remove('loading');
+      button.disabled = false;
+      button.classList.remove('loading');
+      statement.textContent = `Request made to ${url} - success!`;
     })
     .catch((e) => {
-      document.getElementById('DatoCMS-button--primary').disabled = false;
-      document.getElementById('DatoCMS-button--primary').classList.remove('loading');
-      console.log(e);
-      document.getElementsByClassName('error')[0].textContent = 'There was an error';
+      button.disabled = false;
+      button.classList.remove('loading');
+      statement.className += 'error';
+      statement.textContent = `${e.status} - ${e.response.statusText}`;
     });
 };
 
@@ -74,8 +79,7 @@ window.DatoCmsPlugin.init((plugin) => {
       ),
     );
   }, false);
-
-  const error = document.createElement('p');
-  error.classList.add('error');
-  document.getElementById('container').appendChild(error);
+  const statement = document.createElement('p');
+  statement.id = ('statement');
+  container.appendChild(statement);
 });
