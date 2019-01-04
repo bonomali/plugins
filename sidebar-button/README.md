@@ -4,7 +4,7 @@ Shows button
 
 ## Configuration
 
-[Describe/screenshot any global/instance parameters this plugin requires]
+To configure the sidebar button you need to specify the url, define the button's label and write a few lines to explain the content editor what the button does as a hint (optional).
 
 ## Development
 
