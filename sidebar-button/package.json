@@ -2,7 +2,7 @@
   "name": "datocms-plugin-sidebar-button",
   "homepage": "https://github.com/datocms/plugins/datocms-plugin-sidebar-button",
   "version": "0.0.5",
-  "description": "Creates a sidebar button that allows the user to make a POST request to an url containing the record id with custom headers",
+  "description": "Creates a sidebar button that allows the user to make a POST request to an url containing the record id.",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"yarn dev\" \"yarn localtunnel\"",
@@ -59,13 +59,6 @@
           "type": "string",
           "hint": "What the button does",
           "required": false
-        },
-        {
-          "id": "headers",
-          "label": "Custom headers",
-          "type": "json",
-          "required": false,
-          "hint": "Example: {}"
         }
       ]
     }

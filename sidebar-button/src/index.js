@@ -1,6 +1,6 @@
 import './style/style.sass';
 import './style/button.sass';
-import rFetch from 'fetch-reject';
+import fetch from 'fetch-reject';
 
 const callUrl = (url, headers, body) => {
   const button = document.getElementById('DatoCMS-button--primary');
@@ -9,26 +9,29 @@ const callUrl = (url, headers, body) => {
   statement.textContent = '';
   button.className += 'loading';
   button.disabled = true;
-  rFetch(
+  fetch(
     url, { method: 'POST', headers, body },
   )
     .then(() => {
       button.disabled = false;
       button.classList.remove('loading');
-      statement.textContent = `Request made to ${url} - success!`;
+      statement.textContent = `Request made to ${url} with body ${body} - success!`;
     })
     .catch((e) => {
       button.disabled = false;
       button.classList.remove('loading');
       statement.className += 'error';
-      statement.textContent = `${e.status} - ${e.response.statusText}`;
+      e.response.json().then((response) => {
+        statement.textContent = `${e.status} - ${e.response.statusText}`;
+        statement.textContent += `- ${response.message}`;
+      });
     });
 };
 
 window.DatoCmsPlugin.init((plugin) => {
   plugin.startAutoResizer();
   const {
-    url, headers, label, hint,
+    url, label, hint,
   } = plugin.parameters.instance;
 
   const container = document.createElement('div');
@@ -47,21 +50,11 @@ window.DatoCmsPlugin.init((plugin) => {
     container.appendChild(p);
   }
 
-  const completeHeaders = new Headers(
-    Object.assign(
-      {},
-      JSON.parse(headers),
-      {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true',
-      },
-    ),
-  );
-  completeHeaders.append('POST', 'OPTIONS');
+  const headers = new Headers();
+
   const button = document.createElement('button');
   const spinner = document.createElement('span');
+
   button.id = ('DatoCMS-button--primary');
   button.textContent = label;
   button.appendChild(spinner);
@@ -72,7 +65,7 @@ window.DatoCmsPlugin.init((plugin) => {
     if (!event.target.matches('#DatoCMS-button--primary')) return;
     event.preventDefault();
     callUrl(
-      url, completeHeaders, JSON.stringify(
+      url, headers, JSON.stringify(
         {
           id: plugin.itemId,
         },
