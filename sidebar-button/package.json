@@ -1,7 +1,7 @@
 {
   "name": "datocms-plugin-sidebar-button",
   "homepage": "https://github.com/datocms/plugins/datocms-plugin-sidebar-button",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Creates a sidebar button that allows a user to make a POST request to a custom url containing the record id as body.",
   "main": "index.js",
   "scripts": {
